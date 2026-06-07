@@ -32,12 +32,12 @@ export function NotificationCard({
   onMarkAsRead,
 }: NotificationCardProps) {
   const handleDelete = async () => {
-    await logger.info('component', `Delete clicked for notification ${notification.id}`);
+    void logger.info('component', `Delete clicked for notification ${notification.id}`);
     onDelete(notification.id);
   };
 
   const handleMarkAsRead = async () => {
-    await logger.info('component', `Mark as read clicked for notification ${notification.id}`);
+    void logger.info('component', `Mark as read clicked for notification ${notification.id}`);
     onMarkAsRead(notification.id);
   };
 

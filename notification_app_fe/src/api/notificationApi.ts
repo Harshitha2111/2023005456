@@ -12,7 +12,7 @@ export interface Notification {
 // Simulate fetching notifications from backend
 export async function fetchNotifications(): Promise<Notification[]> {
   try {
-    await logger.info('api', 'Fetching notifications...');
+    void logger.info('api', 'Fetching notifications...');
     
     // Mock data for now - replace with real API call
     const notifications: Notification[] = [
@@ -42,11 +42,11 @@ export async function fetchNotifications(): Promise<Notification[]> {
       },
     ];
 
-    await logger.info('api', 'Notifications fetched successfully');
+    void logger.info('api', 'Notifications fetched successfully');
     return notifications;
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : 'Unknown error';
-    await logger.error('api', `Failed to fetch notifications: ${errorMsg}`);
+    void logger.error('api', `Failed to fetch notifications: ${errorMsg}`);
     throw error;
   }
 }
@@ -54,15 +54,15 @@ export async function fetchNotifications(): Promise<Notification[]> {
 // Mark notification as read
 export async function markAsRead(notificationId: string): Promise<void> {
   try {
-    await logger.info('api', `Marking notification ${notificationId} as read`);
+    void logger.info('api', `Marking notification ${notificationId} as read`);
     
     // API call would go here
     // await axios.patch(`${API_BASE_URL}/notifications/${notificationId}/read`);
 
-    await logger.info('state', 'Notification marked as read');
+    void logger.info('state', 'Notification marked as read');
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : 'Unknown error';
-    await logger.error('api', `Failed to mark notification as read: ${errorMsg}`);
+    void logger.error('api', `Failed to mark notification as read: ${errorMsg}`);
     throw error;
   }
 }
@@ -70,15 +70,15 @@ export async function markAsRead(notificationId: string): Promise<void> {
 // Delete notification
 export async function deleteNotification(notificationId: string): Promise<void> {
   try {
-    await logger.info('api', `Deleting notification ${notificationId}`);
+    void logger.info('api', `Deleting notification ${notificationId}`);
     
     // API call would go here
     // await axios.delete(`${API_BASE_URL}/notifications/${notificationId}`);
 
-    await logger.info('state', 'Notification deleted');
+    void logger.info('state', 'Notification deleted');
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : 'Unknown error';
-    await logger.error('api', `Failed to delete notification: ${errorMsg}`);
+    void logger.error('api', `Failed to delete notification: ${errorMsg}`);
     throw error;
   }
 }

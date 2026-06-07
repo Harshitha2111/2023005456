@@ -15,19 +15,19 @@ export function useNotifications() {
   const loadNotifications = async () => {
     try {
       setLoading(true);
-      await logger.info('hook', 'useNotifications hook initialized');
+      void logger.info('hook', 'useNotifications hook initialized');
       
       const data = await fetchNotifications();
       setNotifications(data);
       
       const unreadCount = data.filter(n => !n.read).length;
-      await logger.info('state', `Loaded ${data.length} notifications (${unreadCount} unread)`);
+      void logger.info('state', `Loaded ${data.length} notifications (${unreadCount} unread)`);
       
       setError(null);
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : 'Failed to load notifications';
       setError(errorMsg);
-      await logger.error('hook', `Error in useNotifications: ${errorMsg}`);
+      void logger.error('hook', `Error in useNotifications: ${errorMsg}`);
     } finally {
       setLoading(false);
     }

@@ -24,7 +24,7 @@ export function Home() {
   const [displayNotifications, setDisplayNotifications] = useState<Notification[]>([]);
 
   useEffect(() => {
-    logger.info('page', 'Home page loaded');
+    void logger.info('page', 'Home page loaded');
     setDisplayNotifications(notifications);
   }, [notifications]);
 
@@ -37,11 +37,11 @@ export function Home() {
         n.id === id ? { ...n, read: true } : n
       );
       setDisplayNotifications(updated);
-      await logger.info('state', `Marked notification ${id} as read`);
+      void logger.info('state', `Marked notification ${id} as read`);
       showSnackbar('Marked as read');
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : 'Error';
-      await logger.error('component', `Failed to mark as read: ${errorMsg}`);
+      void logger.error('component', `Failed to mark as read: ${errorMsg}`);
       showSnackbar('Failed to mark as read');
     }
   };
@@ -51,17 +51,17 @@ export function Home() {
       await deleteNotification(id);
       const updated = displayNotifications.filter(n => n.id !== id);
       setDisplayNotifications(updated);
-      await logger.info('state', `Deleted notification ${id}`);
+      void logger.info('state', `Deleted notification ${id}`);
       showSnackbar('Notification deleted');
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : 'Error';
-      await logger.error('component', `Failed to delete: ${errorMsg}`);
+      void logger.error('component', `Failed to delete: ${errorMsg}`);
       showSnackbar('Failed to delete notification');
     }
   };
 
   const handleRefresh = async () => {
-    await logger.info('component', 'User clicked refresh button');
+    void logger.info('component', 'User clicked refresh button');
     await refreshNotifications();
     showSnackbar('Notifications refreshed');
   };

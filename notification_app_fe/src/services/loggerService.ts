@@ -49,7 +49,10 @@ export async function Log(
     return response.data;
   } catch (error) {
     console.error('Logging failed', error);
-    throw error;
+    return {
+      logID: '',
+      message: 'Logging failed',
+    };
   }
 }
 
